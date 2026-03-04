@@ -710,6 +710,84 @@
       text-transform: uppercase;
     }
 
+    /* ── Overflow guard ──────────────────────────────────── */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    /* ── Mobile breakpoint (≤ 768px) ─────────────────────── */
+    @media (max-width: 768px) {
+
+      /* Nav — hide links, show logo only (hamburger placeholder) */
+      nav {
+        padding: 0 24px;
+      }
+      .nav-links {
+        display: none;
+      }
+
+      /* Hero */
+      #hero {
+        padding: 0 24px;
+        min-height: 100svh;
+      }
+      .hero-pills {
+        left: 24px;
+        right: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      /* Shared section padding */
+      #what-is-rtt,
+      #uvp,
+      #audience,
+      #training,
+      #enquiry,
+      footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      /* UVP — 3-col → 1-col */
+      .uvp-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* Audience — 2-col → 1-col, photo below text */
+      .audience-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .audience-photo {
+        aspect-ratio: 16/9;
+        order: -1;
+      }
+
+      /* Enquiry form — 2-col rows → 1-col */
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .btn-submit {
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Footer — 3-col → 1-col */
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+
     /* ── Focus styles (keyboard navigation) ──────────────── */
     :focus-visible {
       outline: 2px solid var(--amber);
