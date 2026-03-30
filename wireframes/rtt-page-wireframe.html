@@ -710,6 +710,110 @@
       text-transform: uppercase;
     }
 
+    /* ══════════════════════════════════════════════════════
+       5b. TRAINING PACKAGES
+    ══════════════════════════════════════════════════════ */
+    #packages {
+      background: var(--charcoal);
+      padding: 96px 56px;
+    }
+
+    #packages h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 4vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: white;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .packages-intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .package-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .package-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 21px;
+      color: white;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .package-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .package-price {
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .package-price-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .package-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.58);
+      flex: 1;
+    }
+
+    .package-meta {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .packages-note {
+      text-align: center;
+      max-width: 600px;
+      margin: 48px auto 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.65;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
     /* ── Overflow guard ──────────────────────────────────── */
     html, body {
       overflow-x: hidden;
@@ -776,6 +880,10 @@
         text-align: center;
       }
 
+      /* Packages — 3-col → 1-col */
+      #packages { padding: 56px 24px; }
+      .packages-grid { grid-template-columns: 1fr; }
+
       /* Footer — 3-col → 1-col */
       .footer-top {
         grid-template-columns: 1fr;
@@ -833,8 +941,8 @@
     </div>
 
     <div class="hero-content">
-      <p class="hero-eyebrow">STAR Health — Reality Trauma Training</p>
-      <h1 class="hero-h1">Reality<br>Trauma<br>Training</h1>
+      <p class="hero-eyebrow">STAR Health — Rapid Trauma Training</p>
+      <h1 class="hero-h1">Rapid<br>Trauma<br>Training</h1>
       <p class="hero-sub">Specialised trauma response training for those who operate where standard first aid ends.</p>
       <div class="hero-ctas">
         <a href="#enquiry" class="btn-primary">Enquire About RTT Training</a>
@@ -854,8 +962,8 @@
   ══════════════════════════════════════════════════════ -->
   <section id="what-is-rtt">
     <span class="section-label light">Section 2 — Intro Strip</span>
-    <h2>What Is Reality Trauma Training?</h2>
-    <p>RTT is a closed-group, scenario-driven program designed for professionals who may encounter traumatic injury in high-stakes operational environments. Built around real-world scenarios — including edged weapon and ballistic trauma — this training goes beyond standard first aid to build genuine response capability under pressure.</p>
+    <h2>What Is Rapid Trauma Training?</h2>
+    <p>Rapid Trauma Training (RTT) is a specialised training approach for high-risk, time-sensitive operational environments. Delivered through reality-based training and grounded in applied trauma care, it develops the capability to deliver life-saving interventions under pressure while maintaining situational awareness. The methodology is informed by recognised international best-practice frameworks.</p>
   </section>
 
   <!-- ══════════════════════════════════════════════════════
@@ -863,7 +971,7 @@
   ══════════════════════════════════════════════════════ -->
   <section id="uvp">
     <span class="section-label dark">Section 3 — Key Differentiators</span>
-    <h2>Why STAR Health RTT?</h2>
+    <h2>Why STAR Health Rapid Trauma Training?</h2>
     <div class="uvp-grid">
 
       <div class="uvp-card">
@@ -957,7 +1065,7 @@
           <div class="accordion-icon" aria-hidden="true">+</div>
         </button>
         <div class="accordion-body" id="panel-1" role="region">
-          Practical application of tourniquet placement, wound packing, and pressure bandaging to manage life-threatening bleeding in pre-hospital environments. Emphasis on speed and technique under stress.
+          Practical application of tourniquet placement, wound packing, and pressure bandaging to manage life-threatening bleeding in pre-hospital environments, with emphasis on speed and precision under stress.
         </div>
       </div>
 
@@ -967,7 +1075,7 @@
           <div class="accordion-icon" aria-hidden="true">+</div>
         </button>
         <div class="accordion-body" id="panel-2" role="region">
-          Specific protocols for responding to ballistic and edged weapon injuries, including chest seal application, wound assessment, and casualty prioritisation in active scenarios.
+          Protocols for responding to ballistic, edged weapon, and explosive shrapnel injuries, including chest seal application, wound assessment, and casualty prioritisation in active scenarios.
         </div>
       </div>
 
@@ -977,31 +1085,76 @@
           <div class="accordion-icon" aria-hidden="true">+</div>
         </button>
         <div class="accordion-body" id="panel-3" role="region">
-          Techniques for maintaining a patent airway in unresponsive or compromised casualties, covering positioning, basic adjuncts, and recognition of airway obstruction in field conditions.
+          Techniques for maintaining a patent airway in unresponsive or compromised casualties, including positioning, basic adjuncts, iOxygen, and suction, with emphasis on effective execution under field conditions.
         </div>
       </div>
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-4">
-          <span>Scenario-Based Simulations</span>
+          <span>Reality-Based Training</span>
           <div class="accordion-icon" aria-hidden="true">+</div>
         </button>
         <div class="accordion-body" id="panel-4" role="region">
-          Immersive, facilitator-led simulations that replicate real operational environments. Participants respond to unfolding casualty scenarios requiring rapid assessment, decision-making, and treatment under pressure.
+          Immersive, facilitator-led exercises that replicate real operational environments, requiring rapid assessment, decision-making, and treatment under pressure.
         </div>
       </div>
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-5">
-          <span>Team-Based Response Drills</span>
+          <span>Multi-Agency Critical Incident Response</span>
           <div class="accordion-icon" aria-hidden="true">+</div>
         </button>
         <div class="accordion-body" id="panel-5" role="region">
-          Coordinated multi-person response exercises designed to build effective communication, role assignment, and shared situational awareness across a team during a mass casualty or multi-patient scenario.
+          Coordinated response exercises designed to build communication, role clarity, and shared situational awareness across teams, with a focus on improving interagency operability during mass casualty or multi-patient scenarios.
         </div>
       </div>
 
     </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 5b: TRAINING PACKAGES & PRICING
+  ══════════════════════════════════════════════════════ -->
+  <section id="packages">
+    <span class="section-label light">Section 5b — Training Packages &amp; Pricing</span>
+    <h2>Training Packages</h2>
+    <p class="packages-intro">STAR Health delivers both structured training programs and fully bespoke packages to meet the operational requirements of organisations and frontline personnel.</p>
+
+    <div class="packages-grid">
+
+      <div class="package-card">
+        <p class="package-name">Rescue, Recovery &amp; Applied Trauma Medicine</p>
+        <div class="package-price-row">
+          <span class="package-price">$250</span>
+          <span class="package-price-label">per participant</span>
+        </div>
+        <p class="package-desc">Reality-based, high-pressure training to master haemorrhage control, wound care, and life-saving interventions before medical professionals arrive.</p>
+        <p class="package-meta">Duration: 1 day &nbsp;|&nbsp; 08:30–16:30</p>
+      </div>
+
+      <div class="package-card">
+        <p class="package-name">Interagency Emergency Medical Response</p>
+        <div class="package-price-row">
+          <span class="package-price">$450</span>
+          <span class="package-price-label">per participant</span>
+        </div>
+        <p class="package-desc">Multi-agency exercises designed to enhance communication, role clarity, and operational coordination during complex incidents.</p>
+        <p class="package-meta">Duration: 1 day &nbsp;|&nbsp; 08:00–17:00</p>
+      </div>
+
+      <div class="package-card">
+        <p class="package-name">First Responder Applied Trauma Medicine</p>
+        <div class="package-price-row">
+          <span class="package-price">$450</span>
+          <span class="package-price-label">per participant</span>
+        </div>
+        <p class="package-desc">Advanced scenarios including active armed offender events, mass casualty recovery, and high-risk operational environments.</p>
+        <p class="package-meta">Duration: 1 day &nbsp;|&nbsp; 08:00–17:00</p>
+      </div>
+
+    </div>
+
+    <p class="packages-note">TPAV members are eligible for discounted pricing. Group bookings of 10 or more participants also receive a group discount.</p>
   </section>
 
   <!-- ══════════════════════════════════════════════════════
