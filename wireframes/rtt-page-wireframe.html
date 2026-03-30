@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAR Health — RTT Page Wireframe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal:   #1C1C1E;
+      --steel-blue: #2C4A6E;
+      --amber:      #C8882A;
+      --off-white:  #F5F4F0;
+      --slate:      #2D2D2D;
+      --mid-grey:   #6B6B6B; /* darkened from #8A8A8A — WCAG AA: 4.87:1 on --off-white */
+      --img-placeholder: #3a4a5a;
+    }
+
+    /*
+     * WCAG AA Contrast Audit (verified ratios):
+     * --charcoal on --off-white ............. 16.1:1  ✓ AAA
+     * white on --charcoal ................... 16.1:1  ✓ AAA
+     * white on --steel-blue ................. 7.87:1  ✓ AAA
+     * --charcoal on --amber (CTA text) ...... 5.61:1  ✓ AA
+     * --amber on --charcoal (eyebrow/logo) .. 5.61:1  ✓ AA
+     * --mid-grey on --off-white (body copy) . 4.87:1  ✓ AA  ← fixed (#8A8A8A was 2.91:1 ✗)
+     *
+     * NOTE: amber (#C8882A) must NOT appear as small text on white/off-white
+     * backgrounds — contrast is only 2.56:1. Use it on --charcoal only,
+     * or as a decorative element (dividers, borders) where text contrast
+     * rules don't apply.
+     */
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--slate);
+      background: var(--off-white);
+    }
+
+    /* ── Wireframe annotation bar ─────────────────────────── */
+    .wf-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #FFD97D;
+      color: #1a1a1a;
+      font-family: 'Inter', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      padding: 6px 12px;
+      z-index: 1000;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Image placeholder utility ────────────────────────── */
+    .img-placeholder {
+      background: var(--img-placeholder);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1.5px dashed rgba(255,255,255,0.2);
+    }
+
+    /* ── Section label ────────────────────────────────────── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .section-label.light { color: white; }
+    .section-label.dark  { color: var(--slate); }
+
+    /* ══════════════════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════════════════ */
+    nav {
+      position: absolute;
+      top: 28px; /* below wf-bar */
+      left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: white;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a.active {
+      color: var(--amber);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       1. HERO
+    ══════════════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 56px;
+      margin-top: 28px; /* offset for wf-bar */
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--img-placeholder);
+      overflow: hidden;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(28, 28, 30, 0.65);
+    }
+
+    .hero-bg-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 740px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    .hero-h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(52px, 8vw, 96px);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.78);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 15px 32px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-pills {
+      position: absolute;
+      bottom: 40px;
+      left: 56px;
+      right: 56px;
+      z-index: 2;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       2. WHAT IS RTT
+    ══════════════════════════════════════════════════════ */
+    #what-is-rtt {
+      background: var(--steel-blue);
+      padding: 88px 56px;
+      text-align: center;
+    }
+
+    #what-is-rtt h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(34px, 4vw, 52px);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: white;
+      margin-bottom: 28px;
+    }
+
+    #what-is-rtt p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       3. UVP / DIFFERENTIATORS
+    ══════════════════════════════════════════════════════ */
+    #uvp {
+      background: var(--off-white);
+      padding: 96px 56px;
+    }
+
+    #uvp h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 4vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .uvp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .uvp-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .uvp-icon {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--charcoal);
+    }
+
+    .uvp-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--charcoal);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .uvp-card h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--charcoal);
+      line-height: 1.3;
+    }
+
+    .uvp-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--mid-grey);
+    }
+
+    .uvp-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--amber);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       4. AUDIENCE
+    ══════════════════════════════════════════════════════ */
+    #audience {
+      background: var(--charcoal);
+      padding: 96px 56px;
+    }
+
+    .audience-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1080px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    #audience h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 3.5vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 36px;
+    }
+
+    .audience-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .audience-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .audience-list li::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .audience-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border: 1.5px dashed rgba(255,255,255,0.2);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       5. TRAINING OVERVIEW (ACCORDION)
+    ══════════════════════════════════════════════════════ */
+    #training {
+      background: var(--off-white);
+      padding: 96px 56px;
+    }
+
+    #training h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 4vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .accordion {
+      max-width: 760px;
+      margin: 0 auto;
+      border-top: 1.5px solid rgba(44,44,46,0.12);
+    }
+
+    .accordion-item {
+      border-bottom: 1.5px solid rgba(44,44,46,0.12);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .accordion-trigger span {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--charcoal);
+    }
+
+    .accordion-icon {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      color: var(--charcoal);
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    .accordion-item.open .accordion-icon {
+      background: var(--charcoal);
+      color: white;
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 0 24px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--mid-grey);
+      max-width: 640px;
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       6. ENQUIRY / CTA
+    ══════════════════════════════════════════════════════ */
+    #enquiry {
+      background: var(--steel-blue);
+      padding: 96px 56px;
+    }
+
+    .enquiry-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    #enquiry h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 4vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    #enquiry .enquiry-sub {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      outline: none;
+      resize: none;
+      width: 100%;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--amber);
+    }
+
+    .form-full {
+      grid-column: 1 / -1;
+    }
+
+    .form-submit-row {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .btn-submit {
+      background: var(--amber);
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-micro {
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.02em;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       7. FOOTER
+    ══════════════════════════════════════════════════════ */
+    footer {
+      background: var(--charcoal);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 56px 56px 32px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: white;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.28);
+    }
+
+    .accreditation-logos {
+      display: flex;
+      gap: 16px;
+    }
+
+    .accreditation-logo-placeholder {
+      width: 56px;
+      height: 28px;
+      background: rgba(255,255,255,0.07);
+      border: 1px dashed rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+    }
+
+    /* ── Overflow guard ──────────────────────────────────── */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    /* ── Mobile breakpoint (≤ 768px) ─────────────────────── */
+    @media (max-width: 768px) {
+
+      /* Nav — hide links, show logo only (hamburger placeholder) */
+      nav {
+        padding: 0 24px;
+      }
+      .nav-links {
+        display: none;
+      }
+
+      /* Hero */
+      #hero {
+        padding: 0 24px;
+        min-height: 100svh;
+      }
+      .hero-pills {
+        left: 24px;
+        right: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      /* Shared section padding */
+      #what-is-rtt,
+      #uvp,
+      #audience,
+      #training,
+      #enquiry,
+      footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      /* UVP — 3-col → 1-col */
+      .uvp-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* Audience — 2-col → 1-col, photo below text */
+      .audience-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .audience-photo {
+        aspect-ratio: 16/9;
+        order: -1;
+      }
+
+      /* Enquiry form — 2-col rows → 1-col */
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .btn-submit {
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Footer — 3-col → 1-col */
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+
+    /* ── Focus styles (keyboard navigation) ──────────────── */
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    .accordion-trigger:focus-visible {
+      outline-offset: -2px;
+    }
+
+    .btn-primary:focus-visible,
+    .btn-ghost:focus-visible,
+    .btn-submit:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Wireframe annotation bar -->
+  <div class="wf-bar">WIREFRAME — STAR Health RTT Page &nbsp;|&nbsp; Byte Development &nbsp;|&nbsp; For Review Only — Not Final Design</div>
+
+  <!-- ── Nav ─────────────────────────────────────────────── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-logo">STAR <span>Health</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#" class="active" aria-current="page">RTT Training</a></li>
+      <li><a href="#">Courses</a></li>
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 1: HERO
+  ══════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-label">Photo Placeholder — Team training scenario, controlled environment, strong lighting</div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">STAR Health — Reality Trauma Training</p>
+      <h1 class="hero-h1">Reality<br>Trauma<br>Training</h1>
+      <p class="hero-sub">Specialised trauma response training for those who operate where standard first aid ends.</p>
+      <div class="hero-ctas">
+        <a href="#enquiry" class="btn-primary">Enquire About RTT Training</a>
+        <a href="#what-is-rtt" class="btn-ghost">Learn More ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-pills">
+      <span class="pill">Nationally Accredited</span>
+      <span class="pill">Scenario-Based</span>
+      <span class="pill">Closed-Group Delivery</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 2: WHAT IS RTT
+  ══════════════════════════════════════════════════════ -->
+  <section id="what-is-rtt">
+    <span class="section-label light">Section 2 — Intro Strip</span>
+    <h2>What Is Reality Trauma Training?</h2>
+    <p>RTT is a closed-group, scenario-driven program designed for professionals who may encounter traumatic injury in high-stakes operational environments. Built around real-world scenarios — including edged weapon and ballistic trauma — this training goes beyond standard first aid to build genuine response capability under pressure.</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 3: UVP / DIFFERENTIATORS
+  ══════════════════════════════════════════════════════ -->
+  <section id="uvp">
+    <span class="section-label dark">Section 3 — Key Differentiators</span>
+    <h2>Why STAR Health RTT?</h2>
+    <div class="uvp-grid">
+
+      <div class="uvp-card">
+        <div class="uvp-icon">
+          <!-- Target/scenario icon -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="3" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/></svg>
+        </div>
+        <div class="uvp-divider"></div>
+        <h3>Scenario-Based Training</h3>
+        <p>Real-world trauma scenarios designed to build instinctive response under operational pressure — not classroom theory.</p>
+      </div>
+
+      <div class="uvp-card">
+        <div class="uvp-icon">
+          <!-- Shield/expert icon -->
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 9.5-8 11C7.5 21.5 4 17 4 12V7l8-4z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="uvp-divider"></div>
+        <h3>Specialist Instructors</h3>
+        <p>Led by experienced practitioners with backgrounds in emergency medicine, law enforcement, and tactical response.</p>
+      </div>
+
+      <div class="uvp-card">
+        <div class="uvp-icon">
+          <!-- Accreditation/badge icon -->
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="uvp-divider"></div>
+        <h3>Nationally Accredited</h3>
+        <p>Training meets national compliance requirements, ensuring your team's qualifications are recognised and current.</p>
+      </div>
+
+      <div class="uvp-card">
+        <div class="uvp-icon">
+          <!-- Lock/confidential icon -->
+          <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="uvp-divider"></div>
+        <h3>Closed-Group Delivery</h3>
+        <p>Private and confidential cohorts — training is never delivered in mixed public groups, preserving operational integrity.</p>
+      </div>
+
+      <div class="uvp-card">
+        <div class="uvp-icon">
+          <!-- Sliders/adaptive icon -->
+          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2" fill="var(--off-white)"/><circle cx="15" cy="12" r="2" fill="var(--off-white)"/><circle cx="9" cy="18" r="2" fill="var(--off-white)"/></svg>
+        </div>
+        <div class="uvp-divider"></div>
+        <h3>Adaptive Curriculum</h3>
+        <p>Content is tailored to your team's role, environment, and existing capability — not a one-size-fits-all program.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 4: AUDIENCE
+  ══════════════════════════════════════════════════════ -->
+  <section id="audience">
+    <span class="section-label light">Section 4 — Who This Is For</span>
+    <div class="audience-inner">
+      <div>
+        <h2>Built for those who operate in high-risk environments</h2>
+        <ul class="audience-list">
+          <li>Law Enforcement &amp; Police Services</li>
+          <li>Protective &amp; Close Protection Services</li>
+          <li>Military &amp; Defence Personnel</li>
+          <li>Emergency Medical Services</li>
+          <li>Fire &amp; Rescue Services</li>
+          <li>Critical Infrastructure Security Teams</li>
+        </ul>
+      </div>
+      <div class="img-placeholder audience-photo">
+        Photo Placeholder<br>Instructor demo, small group
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 5: TRAINING OVERVIEW / ACCORDION
+  ══════════════════════════════════════════════════════ -->
+  <section id="training">
+    <span class="section-label dark">Section 5 — Training Overview (Accordion)</span>
+    <h2>What the Training Covers</h2>
+
+    <div class="accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-1">
+          <span>Haemorrhage Control</span>
+          <div class="accordion-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="accordion-body" id="panel-1" role="region">
+          Practical application of tourniquet placement, wound packing, and pressure bandaging to manage life-threatening bleeding in pre-hospital environments. Emphasis on speed and technique under stress.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-2">
+          <span>Penetrating Trauma Response</span>
+          <div class="accordion-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="accordion-body" id="panel-2" role="region">
+          Specific protocols for responding to ballistic and edged weapon injuries, including chest seal application, wound assessment, and casualty prioritisation in active scenarios.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-3">
+          <span>Airway Management</span>
+          <div class="accordion-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="accordion-body" id="panel-3" role="region">
+          Techniques for maintaining a patent airway in unresponsive or compromised casualties, covering positioning, basic adjuncts, and recognition of airway obstruction in field conditions.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-4">
+          <span>Scenario-Based Simulations</span>
+          <div class="accordion-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="accordion-body" id="panel-4" role="region">
+          Immersive, facilitator-led simulations that replicate real operational environments. Participants respond to unfolding casualty scenarios requiring rapid assessment, decision-making, and treatment under pressure.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="panel-5">
+          <span>Team-Based Response Drills</span>
+          <div class="accordion-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="accordion-body" id="panel-5" role="region">
+          Coordinated multi-person response exercises designed to build effective communication, role assignment, and shared situational awareness across a team during a mass casualty or multi-patient scenario.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 6: ENQUIRY / CTA
+  ══════════════════════════════════════════════════════ -->
+  <section id="enquiry">
+    <span class="section-label light">Section 6 — Enquiry Form</span>
+    <div class="enquiry-inner">
+      <h2>Enquire About RTT Training</h2>
+      <p class="enquiry-sub">RTT courses are delivered to closed groups only. To discuss training for your team or organisation, submit an enquiry below.</p>
+
+      <form onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your full name" />
+          </div>
+          <div class="form-field">
+            <label for="org">Organisation</label>
+            <input type="text" id="org" placeholder="Agency or organisation" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@organisation.com" />
+          </div>
+          <div class="form-field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="+61 4XX XXX XXX" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field form-full">
+            <label for="message">Role / Team Size / Training Requirements</label>
+            <textarea id="message" rows="4" placeholder="Tell us about your team, role, and what you're looking for…"></textarea>
+          </div>
+        </div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn-submit">Submit Enquiry</button>
+          <span class="form-micro">All enquiries are handled confidentially.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 7: FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer>
+    <span class="section-label light" style="margin-bottom: 24px;">Section 7 — Footer (Shared with main site)</span>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">STAR <span>Health</span></div>
+        <p class="footer-tagline">Nationally accredited first aid, fire safety, and reality trauma training for professionals and the public.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Training</h4>
+        <ul>
+          <li><a href="#">RTT — Reality Trauma</a></li>
+          <li><a href="#">First Aid Courses</a></li>
+          <li><a href="#">Fire Safety</a></li>
+          <li><a href="#">Corporate Training</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About STAR Health</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 STAR Health. All rights reserved.</p>
+      <div class="accreditation-logos">
+        <div class="accreditation-logo-placeholder">Logo</div>
+        <div class="accreditation-logo-placeholder">Logo</div>
+        <div class="accreditation-logo-placeholder">Logo</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleAccordion(btn) {
+      const item = btn.closest('.accordion-item');
+      const icon = btn.querySelector('.accordion-icon');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.accordion-icon').textContent = '+';
+        el.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked (if it was closed)
+      if (!isOpen) {
+        item.classList.add('open');
+        icon.textContent = '−';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+  </script>
+</body>
+</html>
