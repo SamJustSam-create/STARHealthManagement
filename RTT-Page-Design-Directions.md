@@ -1,8 +1,20 @@
 # RTT Landing Page — Initial Design & Layout Directions
 **STAR Health | Byte Development**
 **Prepared by:** Samuel Moloney
-**Date:** February 2026
-**Status:** Draft for Client Review
+**Original Date:** February 2026
+**Last Updated:** May 2026
+**Status:** Draft — wireframe delivered, client feedback partially incorporated; awaiting confirmed UVP-box list from Thomas before final revision.
+
+### Revision Notes
+- **2026-03-04:** RTT wireframe shared with client.
+- **2026-03-31:** Client feedback received re: amendments and additions to the "Why STAR Health RTT?" UVP boxes. Pending Thomas's confirmed list before doc and wireframe are updated.
+- **2026-05-12:** Header refreshed; status updated. Image dimensions section deferred to site-wide `Image-Assets-Spec.md`.
+
+### Related Documents
+- `PRD.md` — Project scope and action items.
+- `Image-Assets-Spec.md` — Site-wide image dimensions and creative direction.
+- `wireframes/rtt-page-wireframe.html` — Current wireframe.
+- `wireframes/wireframe-deployment-guide.md` — How wireframes are hosted and shared.
 
 ---
 
@@ -287,11 +299,19 @@ Since Thomas is still sourcing photography, the following shot list should guide
 
 ## Next Steps
 
-1. **Thomas:** Confirm RTT module list for Section 5 (Training Overview)
-2. **Thomas:** Provide first batch of training photography
-3. **Samuel:** Confirm website platform with Dom before proceeding to high-fidelity mockup
-4. **Samuel:** Produce Figma wireframes once platform is confirmed
-5. **All:** Review and sign off on this direction before design execution begins
+*Updated 2026-05-12 to reflect current project state.*
+
+1. **Thomas:** Confirm the amended/additional UVP boxes for Section 3 (feedback raised 2026-03-31, awaiting confirmed list).
+2. **Thomas:** Confirm RTT module list for Section 5 (Training Overview).
+3. **Thomas / Enrique:** Deliver second batch of higher-quality course photography per `Image-Assets-Spec.md` (first batch of 4 Canva-approved images received 2026-05-07).
+4. **Samuel:** Incorporate Thomas's UVP feedback into the wireframe once the confirmed list is received.
+5. **Samuel:** Produce high-fidelity Figma mockup once UVP feedback is incorporated and second image batch is in.
+6. **All:** Review and sign off on final direction before development of the live page begins.
+
+### Resolved
+- ✅ Website platform confirmed with Dom: Shopify Headless via Storefront API (2026-03-08).
+- ✅ Initial wireframe delivered and reviewed (2026-03-04).
+- ✅ Image dimension requirements specified and shared with Enrique (2026-03-31).
 
 ---
 
