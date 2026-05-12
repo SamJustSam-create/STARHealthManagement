@@ -89,7 +89,7 @@ These are the specific shots still needed at the time of writing (2026-05-12). U
 - [ ] Homepage shop banner products (400 × 400) — pending; coordinate with Dom on which products to feature.
 - [ ] RTT hero background (1920 × 1080) — pending from Enrique's next course shoot.
 - [ ] RTT audience photo (800 × 1000) — pending.
-- [x] Initial batch of approved imagery delivered via Canva (2026-05-07, 4 images).
+- [x] Initial batch of approved imagery delivered via Canva (2026-05-07) — 15 images across four Canva designs. Pending sort into the specific slots above as crops are finalised.
 - [ ] Shop hero featured product (900 × 675) — pending; product photography is Dom's responsibility per Enrique.
 - [ ] Shop product grid cards (600 × 600) — pending from Dom; one per product in the catalogue (43 products).
 - [ ] Shop featured kit spotlight (900 × 900) — pending from Dom.

@@ -75,5 +75,5 @@ The brand must walk a fine line between showcasing realistic trauma training and
 * **Samuel (Byte Dev):** Presented initial design and layout directions for the RTT page incorporating the "clean and professional" aesthetic constraints.
 * **Samuel (Byte Dev):** Delivered three site wireframes — Homepage, RTT page, and Shop page — hosted via GitHub Pages and reviewed with the client.
 * **Samuel (Byte Dev):** Provided specific image dimension requirements to Enrique for all hero, product, and content imagery (2026-03-31). See `Image-Assets-Spec.md`.
-* **Enrique (STAR Health):** Delivered first batch of four Canva-approved images for use on the site (2026-05-07).
+* **Enrique (STAR Health):** Delivered first batch of approved imagery — 15 images across four Canva designs — for use on the site (2026-05-07).
 * **Samuel (Byte Dev):** Issued project sit-rep and Fire Safety Training Page proposal to client (2026-05-12).
